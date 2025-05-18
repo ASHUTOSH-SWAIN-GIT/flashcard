@@ -69,7 +69,7 @@ export default function AboutSection() {
               viewport={{ once: true }}
               className="text-3xl md:text-4xl font-extrabold text-[#1a1446] mb-6"
             >
-              You learn faster.
+              You learn Through animation.
             </motion.h3>
             <div className="relative pl-8">
               {/* Vertical dotted line */}

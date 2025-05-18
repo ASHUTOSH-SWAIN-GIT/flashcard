@@ -159,7 +159,7 @@ export default function CardCarousel() {
                       onClick={handleDontKnow}
                       className="px-6 py-2 bg-white text-[#1a1e3a] font-semibold rounded-lg shadow hover:bg-gray-100 transition-colors"
                     >
-                      Don't Know
+                      Don&apos;t Know
                     </button>
                     {/* Thumbs Up Animation */}
                     <AnimatePresence>
