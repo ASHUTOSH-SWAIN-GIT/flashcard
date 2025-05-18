@@ -73,7 +73,7 @@ export default function Footer() {
           {/* Heading */}
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-lg">Stay Connected</h2>
           {/* Description */}
-          <p className="text-lg text-zinc-200 mb-8">Want updates, tips, and spotlight features straight to your inbox? Subscribe to the Outlier Coder's Newsletter.</p>
+          <p className="text-lg text-zinc-200 mb-8">Want updates, tips, and spotlight features straight to your inbox? Subscribe to the Outlier Coder&apos;s Newsletter.</p>
         </div>
       </div>
     </footer>
