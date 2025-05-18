@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Image from 'next/image';
+import { SparklesText } from './magicui/sparkles-text';
 
 export default function Header() {
   const lightRef = useRef(null);
@@ -35,8 +36,8 @@ export default function Header() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center bg-dark grid-bg text-white overflow-hidden px-4">
       {/* Website Name at the Top */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 font-montserrat text-2xl font-bold tracking-widest z-40 select-none">
-        FlipWise
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 font-montserrat text-xl font-bold tracking-widest z-40 select-none">
+        <SparklesText className="text-4xl">FlipWise</SparklesText>
       </div>
 
       {/* Main Content Container */}

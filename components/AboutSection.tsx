@@ -31,7 +31,7 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section className="w-full flex justify-center items-center min-h-[70vh] py-12 px-2 bg-transparent">
+    <section id="about-section" className="w-full flex justify-center items-center min-h-[70vh] py-12 px-2 bg-transparent">
       <div
         className="relative max-w-6xl w-full rounded-3xl p-2 md:p-6 mx-auto bg-gradient-to-br from-[#a259f7] via-[#7b2ff2] to-[#181c3a]"
       >

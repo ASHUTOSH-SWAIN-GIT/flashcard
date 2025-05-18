@@ -7,17 +7,22 @@ import gsap from "gsap";
 interface Card {
   id: number;
   title: string;
-  question: string;
 }
 
 export default function CardCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showThumbsUp, setShowThumbsUp] = useState(false);
   const [cards] = useState<Card[]>([
-    { id: 1, title: "Question 1", question: "What is the capital of France?" },
-    { id: 2, title: "Question 2", question: "What is the largest planet in our solar system?" },
-    { id: 3, title: "Question 3", question: "Who painted the Mona Lisa?" },
-    { id: 4, title: "Question 4", question: "What is the chemical symbol for gold?" },
-    { id: 5, title: "Question 5", question: "What is the largest ocean on Earth?" },
+    { id: 1, title: "What is the output of `console.log(2 + '2')`?" },
+    { id: 2, title: "What is the difference between `let` and `const` in JavaScript?" },
+    { id: 3, title: "What is a closure in JavaScript?" },
+    { id: 4, title: "What is the purpose of the `useEffect` hook in React?" },
+    { id: 5, title: "What is the difference between `==` and `===` in JavaScript?" },
+    { id: 6, title: "Which country is home to the kangaroo?" },
+    { id: 7, title: "What is the main ingredient in guacamole?" },
+    { id: 8, title: "Who painted the Mona Lisa?" },
+    { id: 9, title: "What is the largest ocean on Earth?" },
+    { id: 10, title: "Which element has the chemical symbol 'O'?" },
   ]);
 
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -47,16 +52,28 @@ export default function CardCarousel() {
     setCurrentIndex((prev) => (prev - 1 + cards.length) % cards.length);
   };
 
+  const handleKnow = () => {
+    setShowThumbsUp(true);
+    setTimeout(() => {
+      setShowThumbsUp(false);
+      nextCard();
+    }, 1500);
+  };
+
+  const handleDontKnow = () => {
+    nextCard();
+  };
+
   return (
-    <div className="relative w-full h-[800px] flex items-center justify-center overflow-hidden">
+    <div id="cards-section" className="relative w-full h-[600px] flex items-center justify-center overflow-hidden py-16">
       {/* Navigation Buttons */}
       <button
         onClick={prevCard}
-        className="absolute left-8 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+        className="absolute left-4 z-20 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8 text-white"
+          className="h-6 w-6 text-white"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -71,11 +88,11 @@ export default function CardCarousel() {
       </button>
       <button
         onClick={nextCard}
-        className="absolute right-8 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+        className="absolute right-4 z-20 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8 text-white"
+          className="h-6 w-6 text-white"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -103,7 +120,9 @@ export default function CardCarousel() {
             return (
               <motion.div
                 key={card.id}
-                ref={(el) => { cardRefs.current[index] = el }}
+                ref={(el) => {
+                  if (el) cardRefs.current[index] = el;
+                }}
                 initial={false}
                 animate={{
                   x: isCurrent
@@ -116,24 +135,68 @@ export default function CardCarousel() {
                   scale: isCurrent ? 1 : 0.8,
                   opacity: isCurrent ? 1 : 0.5,
                   zIndex: isCurrent ? 20 : 10,
+                  rotate: isCurrent ? 0 : isLeft ? -10 : isRight ? 10 : 0,
                 }}
                 transition={{
                   type: "spring",
                   stiffness: 300,
                   damping: 30,
                 }}
-                className="absolute w-[500px] h-[600px] bg-gradient-to-br from-[#1a2b3c] via-[#2a3b4c] to-[#3a4b5c] rounded-2xl shadow-2xl overflow-hidden border border-white/10"
+                className="absolute w-[500px] h-[600px] bg-gradient-to-b from-[#1a1e3a] to-[#7b1ff6] rounded-2xl shadow-2xl overflow-hidden border border-white/10"
               >
-                <div className="w-full h-full flex flex-col items-center justify-between p-8">
-                  <div className="text-white/80 text-xl font-medium">{card.title}</div>
-                  <div className="text-white text-3xl font-bold text-center">{card.question}</div>
-                  <div className="flex gap-6 w-full">
-                    <button className="flex-1 py-4 px-6 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold hover:from-red-600 hover:to-red-700 transition-all transform hover:scale-105">
-                      Don't Know
-                    </button>
-                    <button className="flex-1 py-4 px-6 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105">
+                <div className="w-full h-full flex flex-col items-center justify-center text-white font-sans px-8">
+                  <div className="text-3xl md:text-4xl font-bold text-center mb-8 max-w-[90%] break-words">
+                    {card.title}
+                  </div>
+                  <div className="mt-10 flex gap-4 relative">
+                    <button 
+                      onClick={handleKnow}
+                      className="px-6 py-2 bg-white text-[#1a1e3a] font-semibold rounded-lg shadow hover:bg-gray-100 transition-colors"
+                    >
                       Know
                     </button>
+                    <button 
+                      onClick={handleDontKnow}
+                      className="px-6 py-2 bg-white text-[#1a1e3a] font-semibold rounded-lg shadow hover:bg-gray-100 transition-colors"
+                    >
+                      Don't Know
+                    </button>
+                    {/* Thumbs Up Animation */}
+                    <AnimatePresence>
+                      {showThumbsUp && isCurrent && (
+                        <motion.div
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          exit={{ scale: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="absolute -top-20 left-1/2 -translate-x-1/2"
+                        >
+                          <motion.div
+                            initial={{ y: 0 }}
+                            animate={{ y: -20 }}
+                            transition={{ 
+                              duration: 1.5,
+                              ease: "easeOut"
+                            }}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-16 w-16 text-green-400"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
+                              />
+                            </svg>
+                          </motion.div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
               </motion.div>
