@@ -41,7 +41,7 @@ export default function Header() {
 
       {/* Main Content Container */}
       <div className="relative w-full max-w-7xl mx-auto flex items-center justify-center">
-        {/* Animated Image */}
+        {/* Left Animated Image */}
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ 
@@ -63,6 +63,35 @@ export default function Header() {
           <Image
             src="/Switch.svg"
             alt="Switch"
+            width={450}
+            height={450}
+            className="w-[300px] md:w-[400px]"
+          />
+        </motion.div>
+
+        {/* Right Animated Image */}
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ 
+            opacity: 1, 
+            x: 0,
+            y: [0, -20, 0],
+          }}
+          transition={{
+            opacity: { duration: 1 },
+            x: { duration: 1, ease: "easeOut" },
+            y: {
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5
+            }
+          }}
+          className="absolute -right-32 md:-right-48 lg:-right-64 z-30"
+        >
+          <Image
+            src="/Point .svg"
+            alt="Point"
             width={400}
             height={400}
             className="w-[300px] md:w-[400px]"
@@ -70,7 +99,10 @@ export default function Header() {
         </motion.div>
      
         {/* Title and Content */}
-        <div className="text-center space-y-4 z-30 -translate-y-12">
+        <div className="text-center space-y-4 z-30 -translate-y-12 relative">
+          {/* Circular Gradient Background */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-cyan-500/20 rounded-full blur-3xl -z-10" />
+          
           <motion.h1
             ref={titleRef}
             className="font-montserrat text-[3rem] md:text-[7rem] font-extrabold bg-gradient-to-r from-yellow-200 via-purple-400 to-blue-300 text-transparent bg-clip-text drop-shadow-lg"
@@ -78,7 +110,14 @@ export default function Header() {
             Learn through  <br /> flashcards
           </motion.h1>
 
-          <p className="text-lg text-zinc-200">Choose a challenge that excites you. Build with your vision.</p>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="text-xl md:text-2xl text-zinc-200 font-medium tracking-wide max-w-2xl mx-auto leading-relaxed"
+          >
+            Master new skills at your own pace with interactive challenges.
+          </motion.p>
         </div>
       </div>
     </section>
