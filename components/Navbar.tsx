@@ -92,10 +92,15 @@ export const Navbar = () => {
             ))}
           </div>
           {/* GitHub Button */}
-          <button className="ml-8 px-6 py-2 rounded-lg bg-gradient-to-tl from-yellow-300 via-purple-500 to-purple-700 text-black font-semibold shadow-md relative">
-            <span className="relative z-10">Start on GitHub →</span>
+          <a 
+            href="https://github.com/ASHUTOSH-SWAIN-GIT/flashcard"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-8 px-6 py-2 rounded-lg bg-gradient-to-tl from-yellow-300 via-purple-500 to-purple-700 text-black font-semibold shadow-md relative hover:opacity-90 transition-opacity"
+          >
+            <span className="relative z-10">Star on GitHub →</span>
             <span className="absolute inset-0 rounded-lg bg-gradient-to-tl from-yellow-300 via-purple-500 to-purple-700 opacity-40 blur-lg z-0" />
-          </button>
+          </a>
         </div>
       </div>
     </nav>
